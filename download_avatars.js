@@ -16,12 +16,15 @@ function getRepoContributors(repoOwner, repoName, cb) {
   // send http request through request module
   request.get(options, (err, response, body) => {
     if (err) throw err;
-    cb(err, body);
+    let info = JSON.parse(body)
+    cb(err, info);
   })
 
 }
 
-getRepoContributors("lighthouse-labs", "jungle-rails", function(err, result) {
+getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
-  console.log("Result:", result);
+  result.forEach((person) => {
+    console.log(person.avatar_url)
+  })
 });
