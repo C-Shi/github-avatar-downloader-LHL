@@ -12,7 +12,8 @@ const fs = require('fs');
 
 
 // collecting info from command line
-const repo = [process.argv[2], process.argv[3]];
+const repoOwner = process.argv[2];
+const repoName = process.argv[3];
 
 // Welcome info for user
 console.log('Welcome to the GitHub Avatar Downloader! \n');
@@ -65,7 +66,7 @@ function downloadImageByURL(url, filePath) {
 
 // Execute the function
 // 1. getRepoContributors executeed, request JSON from the jquery
-getRepoContributors(repo[0], repo[1], function(err, result) {
+getRepoContributors(repoOwner, repoName, function(err, result) {
 
   // when all contributors info has been retained and parsed, callback is executeed!!
   console.log("Errors:", err);
