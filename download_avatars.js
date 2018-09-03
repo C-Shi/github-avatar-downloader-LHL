@@ -26,7 +26,7 @@ function getRepoContributors(repoOwner, repoName, cb) {
   request.get(options, (err, response, body) => {
     if (err) throw err;
     let info = JSON.parse(body)
-    contributors = cb(err, info);
+    cb(err, info);
   })
 
 }
@@ -36,14 +36,19 @@ function downloadImageByURL(url, filePath) {
     .on('error', (err) => {
       if (err) throw err;
     })
-    .pipe(fs.createWriteStream('./avatars/avatar.jpg'))
+    .pipe(fs.createWriteStream(filePath))
+    .on('finish', () => {
+      console.log('Avatar download');
+    })
 }
 
 getRepoContributors("jquery", "jquery", function(err, result) {
   console.log("Errors:", err);
+
   let avatarList = [];
   result.forEach((person) => {
-    avatarList.push(person.avatar_url);
+    let user = [person.login, person.avatar_url];
+    avatarList.push(user);
   })
 
   // create a directory - now ready to download
@@ -53,8 +58,8 @@ getRepoContributors("jquery", "jquery", function(err, result) {
   };
 
   avatarList.forEach((avatar) => {
-    downloadImageByURL(avatar, dir)
+    let path = dir + '/' + avatar[0] + '.jpg';
+    downloadImageByURL(avatar[1], path)
   })
-
 });
 
