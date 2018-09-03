@@ -41,7 +41,14 @@ function getRepoContributors(repoOwner, repoName, cb) {
   // send http request through request module
   request.get(options, (err, response, body) => {
     if (err) throw err;
+
     let info = JSON.parse(body); // parse json body into js object
+
+    // add a fallback incase the repo user searched does not exist
+    if (info.message == 'Not Found'){
+      console.log('Sorry, this repo is not exist! ');
+      return -1;
+    }
 
     // when complete, passing the obtained contributors object into callback for further process
     cb(err, info);
