@@ -4,13 +4,24 @@
 
 Given a GitHub repository name and owner, download all the contributors' profile images and save them to a subdirectory, `avatars/`.
 
+## Setup
+
+1. clone this repository to your local machine, make sure you have node and npm installed
+
+2. run npm install to intall all the dependencies required for this application
+
+3. open download_avatars.js file, on line 36 provide your github personal token
+```
+'Authorization': 'token ' + <Your Github Person Token>
+```
+
 ## Expected Usage
 
 This program should be executed from the command line, in the following manner:
 
-`node download_avatars.js jquery jquery`
+`node download_avatars.js <repo owner> <repo name>`
 
-... (whatever else you'd like to include)
+Make sure you pass two argument when you run your program
 
 ## Author
 Cheng Shi
