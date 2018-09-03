@@ -5,9 +5,14 @@
   4. loop through the array and download each avatar
 */
 
+// require all the module
 const request = require('request');
 const token = require('./secret');
 const fs = require('fs');
+
+
+// collecting info from command line
+const repo = [process.argv[2], process.argv[3]];
 
 // Welcome info for user
 console.log('Welcome to the GitHub Avatar Downloader! \n');
@@ -16,6 +21,13 @@ console.log('Welcome to the GitHub Avatar Downloader! \n');
 
 // script all avatar url
 function getRepoContributors(repoOwner, repoName, cb) {
+
+  // add a fallback in case user does not input anything through commandline
+  if (!repoOwner || !repoName){
+    console.log('No info provided. Please enter repoOwer and repoName respectively through command line');
+    return -1;
+  }
+
   // define a url with repoOwner and repoName passed in
   const options = {
     url: `https://api.github.com/repos/${repoOwner}/${repoName}/contributors`,
@@ -53,7 +65,7 @@ function downloadImageByURL(url, filePath) {
 
 // Execute the function
 // 1. getRepoContributors executeed, request JSON from the jquery
-getRepoContributors("jquery", "jquery", function(err, result) {
+getRepoContributors(repo[0], repo[1], function(err, result) {
 
   // when all contributors info has been retained and parsed, callback is executeed!!
   console.log("Errors:", err);
