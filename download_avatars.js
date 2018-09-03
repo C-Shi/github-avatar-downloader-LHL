@@ -6,6 +6,7 @@
 */
 
 // require all the module
+require('dotenv').config();
 const request = require('request');
 const token = require('./secret');
 const fs = require('fs');

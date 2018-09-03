@@ -1,5 +1,8 @@
 secret.js
 .DS_Store
+
+# environment variables
+.env
 avatars/
 
 # Logs
