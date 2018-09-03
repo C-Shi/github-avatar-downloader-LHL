@@ -10,9 +10,10 @@ Given a GitHub repository name and owner, download all the contributors' profile
 
 2. run npm install to intall all the dependencies required for this application
 
-3. open download_avatars.js file, on line 36 provide your github personal token
-```
-'Authorization': 'token ' + <Your Github Person Token>
+3. open download_avatars.js file, on line 36 and 37 provide your github info
+```javascript
+    'User-Agent': process.env.GITHUB_USER,
+    'Authorization': 'token ' + process.env.GITHUB_TOKEN
 ```
 
 ## Expected Usage
