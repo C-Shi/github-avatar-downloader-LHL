@@ -58,7 +58,7 @@ function downloadImageByURL(url, filePath) {
     .pipe(fs.createWriteStream(filePath))
     .on('finish', () => {
       console.log('Avatar download');
-    })
+    });
 }
 
 // ******************************** File execution start here *********************************
@@ -75,18 +75,18 @@ getRepoContributors(repo[0], repo[1], function(err, result) {
   result.forEach((person) => {
     let user = [person.login, person.avatar_url];
     avatarList.push(user);
-  })
+  });
 
   // create a directory - now ready to download
   let dir = './avatars';
   if (!fs.existsSync(dir)){
     fs.mkdirSync(dir);
-  };
+  }
 
   // for each of the contributor info, execute downloadImageByURL to download the picture
   avatarList.forEach((avatar) => {
     let path = dir + '/' + avatar[0] + '.jpg';
-    downloadImageByURL(avatar[1], path)
-  })
+    downloadImageByURL(avatar[1], path);
+  });
 });
 
